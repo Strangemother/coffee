@@ -1,0 +1,120 @@
+{% extends 'reserved/base.html' %}
+{% load staticfiles %}
+{% load text %}
+
+
+{% block tagline %}{% db_text "menu header" %}{% endblock %}
+{% block tagstrap %}{% db_text "menu tagline" %}{% endblock %}
+{% block title %}{% db_text "menu" %}{% endblock %}
+{% block body_class %}menus{% endblock %}
+
+{% block container %}
+
+    {{ block.super }}
+
+    <div class="links">
+        <!-- <a class='new-venue' href="{% url 'venues_create' %}">New Venue</a> -->
+    </div>
+
+    <ul class='list collection with-header'>
+    {% for menu in object_list %}
+        <li class="item collection-item">
+            <h1>{{ menu.name }} {% db_text "menu" %}</h1>
+            {% for category in menu.categories.all %}
+            <ul class='collection'>
+                <li class='collection-item category-name'>
+                    <h2>{{ category.name }}</h2>
+                    <ul class="products collection">
+                        {% for product in category.product_set.all %}
+                        <li class="product no-padding collection-item {% if forloop.counter|divisibleby:2 %}even{% else %}odd{% endif %}" data-item='product-{{ product.id }}'>
+
+                            <i data-action='add' data-id='{{ product.id }}' class="material-icons circle">add_circle</i>
+                            <h5 class="title">{{ product.name }}</h5>
+
+                            <a href="#!" class="secondary-content blue-grey-text" data-price='{{ product.price }}' data-item='cost' data-id='{{ product.id }}'>
+                                <!-- <i class="material-icons">grade</i> -->
+                                <span class="hidden cost-fix cost-prefix">&pound;</span>
+                                <span class="cost">{{ product.price }}</span>
+                                <span class="hidden cost-fix cost-postfix">p</span>
+                            </a>
+
+                            <ul class="order-choices collection">
+                                <li class="extras row collection-item no-padding">
+                                    <div class="col choice-type s1">
+                                        <i data-action='add' data-id='{{ product.id }}' class="material-icons circle">add_circle</i>
+                                    </div>
+                                    <div class="col choice-type s9">
+                                        sugar
+                                    </div>
+                                    <div class="col choice-type s1">
+                                        <div class="extra-count">1</div>
+                                    </div>
+                                    <div class="col choice-type s1">
+                                        <span class="cost">10</span>
+                                    </div>
+                                </li>
+                                <li class="extras row collection-item no-padding">
+                                    <div class="col choice-type s1">
+                                        <i data-action='add' data-id='{{ product.id }}' class="material-icons circle">add_circle</i>
+                                    </div>
+                                    <div class="col choice-type s9">
+                                        extra milk
+                                    </div>
+                                    <div class="col choice-type s1">
+                                        <div class="extra-count">1</div>
+                                    </div>
+                                    <div class="col choice-type s1">
+                                        <span class="cost">20</span>
+                                    </div>
+                                </li>
+                                <li class="extras row collection-item no-padding">
+                                    <div class="col choice-type s1">
+                                        <i data-action='add' data-id='{{ product.id }}' class="material-icons circle">add_circle</i>
+                                    </div>
+                                    <div class="col choice-type s9">
+                                        extra shot
+                                    </div>
+                                    <div class="col choice-type s1">
+                                        <div class="extra-count">1</div>
+                                    </div>
+                                    <div class="col choice-type s1">
+                                        <span class="cost">50</span>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div class="order-sub">
+                                <div class="extras row collection-item no-padding">
+                                    <div class="col choice-type s1">
+                                        <i data-action='add' data-id='{{ product.id }}' class="material-icons circle">grade</i>
+                                    </div>
+                                    <div class="col choice-type s9">
+                                        {% db_text "total" %}
+                                    </div>
+                                    <div class="col choice-type s1">
+                                        <div class="extra-count">1</div>
+                                    </div>
+                                    <div class="col choice-type s1">
+                                        <span class="cost">{{ product.price }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </li>
+            </ul>
+            {% endfor %}
+        </li>
+    {% empty %}
+        <li class="empty_list">{% db_text "menu empty" %}</li>
+    {% endfor %}
+    </ul>
+
+
+{% endblock %}
+
+{% block footerjs %}
+    {{ block.super }}
+    <script src="{% url 'menu_data' %}"></script>
+    <script src="{% static 'reserved/js/menu_list.js' %}"></script>
+{% endblock %}

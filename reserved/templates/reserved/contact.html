@@ -1,0 +1,50 @@
+{% extends 'reserved/base.html' %}
+{% load staticfiles %}
+{% block title %}Contact{% endblock %}
+{% block body_class %}contact{% endblock %}
+
+{% block container %}
+<div class="row">
+
+	<div class="col s8 address">
+		<address class="name">{{ view.address.name }}</address>
+		<address class="address">{{ view.address.address }}</address>
+	</div>
+
+	<div class="col s4 opening-times">
+        <ul class="collection open-times with-header no-padding">
+            <li class="collection-header row time no-padding">
+                <div class="col s4">&nbsp;</div>
+                <div class="col s4">Open</div>
+                <div class="col s4">Close</div>
+            </li>
+        {% for time in view.open_times %}
+            <li class="collection-item row time no-padding">
+                <div class="col s4 name">{{ time.name }}</div>
+                <div class="col s4 active-time">{{ time.active_time }}</div>
+                <div class="col s4 deactive-time">{{ time.deactive_time }}</div>
+            </li>
+        {% endfor %}
+        </ul>
+    </div>
+</div>
+<div class="row map">
+	<div class="map-container">
+		 <div id="g-map"></div>
+	</div>
+</div>
+{% endblock %}
+
+{% block headjs %}
+    {{ block.super }}
+    <script src="https://maps.googleapis.com/maps/api/js"></script>
+{% endblock %}
+
+{% block footerjs %}
+    {{ block.super }}
+  	<script>
+  		addressLatLong = [{{ view.address.latitude}}, {{ view.address.longitude }}]
+  	</script>
+	<script src="{% static 'reserved/js/contact.js' %}"></script>
+{% endblock %}
+

@@ -1,0 +1,53 @@
+{% load text %}
+
+<div class="menu hidden">
+ 	<ul>
+ 		<li class="seperator"><a href="javascript:;">Hi {{ user.username }}!</a></li>
+    	<li><a href="/">Home</a></li>
+    	<li><a href="{% url 'menu' %}">{% db_text "menu" %}</a></li>
+
+    	<li><a href="About">About</a></li>
+    	<li><a href="{% url 'contact' %}">{% db_text "contact" %}</a></li>
+
+		{% if user.is_anonymous %}
+		  <li><a href="{% url 'userena_signin' %}">{% db_text "login" %}</a></li>
+		{% else %}
+
+			<li class="divider"></li>
+
+			<!-- <li data-show='venues-list'><a href="{% url 'reserved_venues' %}">Venues</a>
+				<ul class='venues-list hidden'>
+					<li><a href="{% url 'venues_create' %}">New</a></li>
+					<li><a href="{% url 'venues_calendar' %}">Calendar</a></li>
+				</ul>
+			</li>
+
+			<li><a href="{% url 'event_list' %}">Events</a></li>
+
+			<li data-show='bookings-list'><a href="{% url 'reserved_bookings' %}">Bookings</a>
+				<ul class='bookings-list hidden'>
+					<li><a href="{% url 'bookings_create' %}">New</a></li>
+				</ul>
+			</li>
+
+			<li><a href="{% url 'reserved_companies' %}">Companies</a></li> -->
+
+			<li><a href="{% url 'userena_profile_list' %}">{% db_text "accounts" %}</a></li>
+
+			<li class="divider"></li>
+		{% endif %}
+
+		{% if not user.is_anonymous %}
+
+			<li class="divider"></li>
+			{% if user.is_staff %}
+				<li class='admin'><a href="/admin/">{% db_text "admin" %}</a></li>
+			{% else %}
+				<li><a href="{% url 'userena_profile_detail' user.username %}">{% db_text "profile" %}</a></li>
+			{% endif %}
+
+			<li><a href="{% url 'userena_signout' %}">{% db_text "logout" %}</a></li>
+		{% endif %}
+
+    </ul>
+</div>

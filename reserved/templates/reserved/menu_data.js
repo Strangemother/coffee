@@ -1,0 +1,1 @@
+menuData= {{ view.json|safe }}

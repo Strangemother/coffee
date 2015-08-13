@@ -1,0 +1,14 @@
+* {
+    /* color: red !important; */
+}
+
+
+.hero .icon {
+    background: url("/static/img/icons/coffee.svg") no-repeat;
+    background-size: 100% 138%;
+}
+
+header .bar .logo .icon {
+    background: url("/static/img/icons/coffee.svg") no-repeat top;
+    background-size: 56%;
+}

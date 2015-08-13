@@ -1,0 +1,15 @@
+{% load staticfiles %}
+
+<div class="overlay"></div>
+<div class="color overlay"></div>
+<div class="icon"></div>
+<h1 class="brand">{% block tagline %}Cafe Milano{% endblock %}</h1>
+
+<h2>{% block tagstrap %}Italian food to go{% endblock %}</h2>
+{% block hero_extra %}{% endblock %}
+<div class="video-container">
+    <span class="video">    </span>
+    <video autoplay loop poster="{% static 'reserved/img/coffee.jpg' %}" id="bgvid">
+        <source src="{% static 'reserved/coffee.mp4' %}" type="video/mp4">
+    </video>
+</div>

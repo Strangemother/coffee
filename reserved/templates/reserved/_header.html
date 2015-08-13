@@ -1,0 +1,28 @@
+{% load text %}
+
+<header>
+    <div class="bar fixed">
+        <nav>
+            <span class="nav-icon icon-menu"></span>
+            <ul>
+                <li>{% db_text "home" %}</li>
+                <li>{% db_text "about" %}</li>
+            </ul>
+        </nav>
+        <h1 class='company title'>{% db_text "name" %}</h1>
+        <h2 class="site">
+            <span class="icon icon-arrow-down"></span>
+            <span class="location">{% db_text "open" %}</span>
+        </h2>
+        <div class="logo">
+            <div class="icon"></div>
+        </div>
+        <div class="cart">
+            <div class="count" data-item='cart-count'>0</div>
+            <div class="price" data-item='cart-total'>0</div>
+        </div>
+    </div>
+
+    <div class="privacy"></div>
+
+</header>
