@@ -3,3 +3,4 @@ env/
 *.sql
 static/*
 media/*
+reserved_dev
